@@ -1,4 +1,4 @@
-import config from '../config'
+// import config from '../config'
 
 const AuthApiService = {
     postLogin({ user_name, password }) {
@@ -9,15 +9,12 @@ const AuthApiService = {
             },
             body: JSON.stringify({ user_name, password }),
         }
-        console.log(options)
-        return fetch(`${config.API_ENDPOINT}/auth/login`, options)
+        return fetch(`http://localhost:8000/api/auth/login`, options)
             .then(res =>
-                console.log(res)
                 (!res.ok) ?
-                res.json().then(e => Promise.reject(e)) :
+                res.json().then(e => Promise.reject(e) && console.log('not succesful')) :
                 res.json()
             )
     },
 }
-
 export default AuthApiService
